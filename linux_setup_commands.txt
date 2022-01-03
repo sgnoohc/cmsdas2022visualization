@@ -1,0 +1,7 @@
+git clone https://github.com/sgnoohc/cmsdas2022visualization.git
+cd cmsdas2022visualization
+sh get_sample_commands.sh YOUR_LPC_USERNAME
+wget http://cmsshow-rels.web.cern.ch/cmsShow-rels/old-releases/cmsShow-9.4-1.linux.tar.gz
+tar xzf  cmsShow-9.4-1.linux.tar.gz
+cd  cmsShow-9.4-1
+./cmsShow --no-version-check ../rootfiles/dy.root

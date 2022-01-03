@@ -1,0 +1,31 @@
+# On your laptop
+export LPCUSERNAME=pchang # Change the username to yours
+kinit ${LPCUSERNAME}@FNAL.GOV
+ssh -Y ${LPCUSERNAME}@cmslpc-sl7.fnal.gov # the chacha20 cipher makes it speed a little bit...
+
+# On CMS LPC Cluster
+cd nobackup
+mkdir -p VisualizationExercise
+cd VisualizationExercise
+mkdir -p workarea
+cd workarea
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/dy.root .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/ggh4l.root .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/ttjets.root .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/data_SingleElectron.root .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/data_SingleMuon.root .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/BadEvents_Run2016B1.root  .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/BadEvents_Run2016B2.root  .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/BadEvents_Run2016C1.root  .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/BadEvents_Run2016D1.root  .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/BadEvents_Run2016D2.root  .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/BadEvents_Run2016D3.root .
+xrdcp root://cmseos.fnal.gov//store/user/cmsdas/2020/short_exercises/Visualization/BadEvents_Run2016D5_AOD.root .
+cd ../
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+export SCRAM_ARCH=slc7_amd64_gcc700
+cmsrel CMSSW_10_2_1
+cd CMSSW_10_2_1/src
+cmsenv
+cd ../../workarea
+cmsShow --no-version-check dy.root

@@ -1,0 +1,24 @@
+#!/bin/bash
+usage()
+{
+    echo "Usage:"
+    echo ""
+    echo "   $0 FILE.root"
+    echo ""
+    echo ""
+    exit
+}
+if [ -z $1 ]; then usage; fi
+/usr/X11/bin/xhost +localhost # For Mac OSX Catalina the XQuartz xhost is not in $PATH so full path is needed
+INPUTROOTFILEPATH=$(realpath $1)
+docker run \
+    -it \
+    --rm \
+    --name fw9.4.1 \
+    -e DISPLAY=host.docker.internal:0 \
+    -e XAUTHORITY=/.Xauthority \
+    --net host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v ${HOME}/.Xauthority:/.Xauthority \
+    -v ${INPUTROOTFILEPATH}:/cmsShow-9.4-1/file.root \
+    sgnoohc/fireworks:9.4.1
